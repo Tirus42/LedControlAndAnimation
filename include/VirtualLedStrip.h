@@ -61,6 +61,10 @@ typedef VirtualMultiLedStrip<ILedStripWithStorage, ILedStripWithStorage, ILedStr
 typedef VirtualMultiLedStrip<ILedStripWithStorage, ILedStripWithStorage, ILedStripWithStorage, ILedStripWithStorage> VirtualMultiLedStrip4;
 typedef VirtualMultiLedStrip<ILedStripWithStorage, ILedStripWithStorage, ILedStripWithStorage, ILedStripWithStorage, ILedStripWithStorage> VirtualMultiLedStrip5;
 
+/**
+* Simple pass-through virtual led strip.
+* Passes all calls to the base strip reference.
+*/
 class VirtualPassthroughLedStrip : public ILedStripWithStorage {
     protected:
         ILedStripWithStorage& baseStrip;
@@ -86,6 +90,10 @@ class VirtualPassthroughLedStrip : public ILedStripWithStorage {
         }
 };
 
+/**
+* Maps a subset of leds of the given base strip.
+* Allows to specify the individual indices.
+*/
 class VirtualMappedLedStrip : public VirtualPassthroughLedStrip {
     private:
         std::vector<ledoffset_t> indices;
@@ -112,5 +120,38 @@ class VirtualMappedLedStrip : public VirtualPassthroughLedStrip {
 
         virtual RGBW getLed(ledoffset_t index) const override {
             return baseStrip.getLed(indices[index]);
+        }
+};
+
+/**
+* Virtual led strip which inverts the offsets of all leds.
+* Makes the first to the last and vice versa.
+*/
+class VirtualInversedLedStrip : public ILedStripWithStorage {
+    private:
+        ILedStripWithStorage& leds;
+
+        ledoffset_t calcOffset(ledoffset_t index) const {
+            return leds.getLedCount() - 1 - index;
+        }
+
+    public:
+        VirtualInversedLedStrip(ILedStripWithStorage& leds) :
+            leds(leds) {}
+
+        virtual ledoffset_t getLedCount() const override {
+            return leds.getLedCount();
+        }
+
+        virtual void setLed(ledoffset_t index, RGBW color, bool flush = false) override {
+            leds.setLed(calcOffset(index), color, flush);
+        }
+
+        virtual RGBW getLed(ledoffset_t index) const override {
+            return leds.getLed(calcOffset(index));
+        }
+
+        virtual void updateLeds() override {
+            leds.updateLeds();
         }
 };
