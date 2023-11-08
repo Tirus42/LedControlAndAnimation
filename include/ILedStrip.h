@@ -23,15 +23,7 @@ class ILedStrip {
         }
 
         virtual void clear(bool flush = false) {
-            ledoffset_t count = getLedCount();
-
-            for (ledoffset_t i = 0; i < count; ++i) {
-                setLed(i, RGBW(), false);
-            }
-
-            if (flush) {
-                updateLeds();
-            }
+            setRange(0, getLedCount(), RGBW(), flush);
         }
 
         virtual void updateLeds() = 0;

@@ -146,4 +146,8 @@ class AnimationManager {
         void addAnimation(ALedAnimation* ptr) {
             queue.emplace_back(std::move(ptr));
         }
+
+        bool empty() const {
+			return queue.empty();
+        }
 };
