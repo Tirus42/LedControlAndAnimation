@@ -101,6 +101,53 @@ class FadeFromExistingAnimation : public FadeAnimation {
         }
 };
 
+/**
+ * Lets the specified led blink countBlinks times.
+ * Each flash is 100 ms long and 300 ms off.
+ */
+class BlinkAnimation : public ALedAnimation {
+    private:
+        RGBW color;
+        RGBW previousColor;
+        uint16_t ledIndex;
+        uint16_t countBlicks;
+        bool started:1;
+        bool active:1;
+
+    public:
+        BlinkAnimation(uint32_t startTime, uint16_t countBlicks, ILedStripWithStorage& ledControl, uint16_t ledIndex, RGBW color) :
+            ALedAnimation(startTime, countBlicks * 400, ledControl),
+            color(color),
+            previousColor(),
+            ledIndex(ledIndex),
+            countBlicks(countBlicks),
+            started(false),
+            active(false) {}
+
+        virtual void update(uint32_t currentTime) override {
+            if (!started) {
+                previousColor = ledControl.getLed(ledIndex);
+                started = true;
+            }
+
+            uint32_t deltaTime = startTime - currentTime;
+            deltaTime = deltaTime % 400;
+
+            if (deltaTime <= 100) {
+                if (!active && countBlicks > 0) {
+                    ledControl.setLed(ledIndex, color);
+                    countBlicks--;
+                    active = true;
+                }
+            } else {
+                if (active) {
+                    ledControl.setLed(ledIndex, previousColor);
+                    active = false;
+                }
+            }
+        }
+};
+
 class AnimationManager {
     private:
         typedef std::unique_ptr<ALedAnimation> AnimationPtr;
@@ -148,6 +195,6 @@ class AnimationManager {
         }
 
         bool empty() const {
-			return queue.empty();
+            return queue.empty();
         }
 };
