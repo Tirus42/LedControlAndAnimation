@@ -1,6 +1,6 @@
 {
   "name": "LedControlAndAnimation",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Header and implementation for led strips with a simple animation framework.",
   "keywords": "led, animation",
   "repository":
@@ -21,5 +21,15 @@
     "tirus/CiString": "~1.0.0"
   },
   "frameworks": "arduino",
-  "platforms": "espressif32"
+  "platforms": "espressif32",
+  "examples": [
+    {
+        "name": "APA102Animation",
+        "base": "examples/APA102Animation",
+        "files": [
+            "platformio.ini",
+            "src/APA102Animation.cpp"
+        ]
+    }
+  ]
 }
