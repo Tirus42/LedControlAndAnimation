@@ -94,6 +94,10 @@ struct RGBW {
         return r == other.r && g == other.g && b == other.b && w == other.w;
     }
 
+    bool operator!=(const RGBW& other) const {
+        return r != other.r || g != other.g || b != other.b || w != other.w;
+    }
+
     RGBW interpolateTo(const RGBW& other, float factor) const {
         return *this * (1.f - factor) + other * factor;
     }
@@ -104,6 +108,15 @@ struct RGBW {
                    std::max(a.g, b.g),
                    std::max(a.b, b.b),
                    std::max(a.w, b.w)
+               );
+    }
+
+    static RGBW Min(const RGBW& a, const RGBW& b) {
+        return RGBW(
+                   std::min(a.r, b.r),
+                   std::min(a.g, b.g),
+                   std::min(a.b, b.b),
+                   std::min(a.w, b.w)
                );
     }
 };

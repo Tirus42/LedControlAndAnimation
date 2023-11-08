@@ -1,6 +1,6 @@
 {
   "name": "LedControlAndAnimation",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Header and implementation for led strips with a simple animation framework.",
   "keywords": "led, animation",
   "repository":
