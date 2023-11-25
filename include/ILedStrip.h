@@ -22,6 +22,14 @@ class ILedStrip {
             }
         }
 
+        /**
+        * Sets all LEDs to the specified color.
+        * \param flush performs a update to the physics leds
+        */
+        virtual void setAll(RGBW color, bool flush = false) {
+			setRange(0, getLedCount(), color, flush);
+        }
+
         virtual void clear(bool flush = false) {
             setRange(0, getLedCount(), RGBW(), flush);
         }

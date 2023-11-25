@@ -125,7 +125,10 @@ static const RGBW COLOR_OFF = RGBW();
 static const RGBW COLOR_RED = RGBW(255, 0, 0, 0);
 static const RGBW COLOR_GREEN = RGBW(0, 255, 0, 0);
 static const RGBW COLOR_BLUE = RGBW(0, 0, 255, 0);
+static const RGBW COLOR_YELLOW = RGBW(0xFF, 0xFF, 0, 0);
 static const RGBW COLOR_WWHITE = RGBW(0, 0, 0, 255);
+static const RGBW COLOR_TURQUOISE = RGBW(0, 0xFF, 0xFF, 0);
+static const RGBW COLOR_MAGENTA = RGBW(0xFF, 0, 0xFF, 0);
 static const RGBW COLOR_KWHITE = RGBW(255, 255, 255, 0);
 static const RGBW COLOR_NWHITE = RGBW(255, 255, 255, 255);
 static const RGBW COLOR_ALL = COLOR_NWHITE;
@@ -139,9 +142,9 @@ static const std::map<CiString, RGBW> NamedColors = {
     {"White", COLOR_NWHITE},
     {"CWhite", COLOR_KWHITE},
     {"WWhite", COLOR_WWHITE},
-    {"Yellow", RGBW(0xFF, 0xFF, 0, 0)},
-    {"Turquoise", RGBW(0, 0xFF, 0xFF, 0)},
-    {"Magenta", RGBW(0xFF, 0, 0xFF, 0)},
+    {"Yellow", COLOR_YELLOW},
+    {"Turquoise", COLOR_TURQUOISE},
+    {"Magenta", COLOR_MAGENTA},
 };
 
 /**
