@@ -8,7 +8,7 @@ struct LedPowerConsumptionInfo {
     const float colorChannelMaxPowerConsumtion_mA;
     const float whiteChannelMaxPowerConsumtion_mA;
 
-    LedPowerConsumptionInfo(float ledBasePowerConsumtion_mA, float colorChannelMaxPowerConsumtion_mA, float whiteChannelMaxPowerConsumtion_mA) :
+    constexpr LedPowerConsumptionInfo(float ledBasePowerConsumtion_mA, float colorChannelMaxPowerConsumtion_mA, float whiteChannelMaxPowerConsumtion_mA) :
         ledBasePowerConsumtion_mA(ledBasePowerConsumtion_mA),
         colorChannelMaxPowerConsumtion_mA(colorChannelMaxPowerConsumtion_mA),
         whiteChannelMaxPowerConsumtion_mA(whiteChannelMaxPowerConsumtion_mA) {}
