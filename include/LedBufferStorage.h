@@ -20,7 +20,7 @@ class LedBufferStorage : public ILedStripWithStorage {
             return pixels.size();
         }
 
-        virtual void setLed(ledoffset_t index, RGBW color, bool flush = false) {
+        virtual void setLed(ledoffset_t index, RGBW color, bool flush = false) override {
             pixels[index] = color;
 
             if (flush) {

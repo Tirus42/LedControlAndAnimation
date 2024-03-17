@@ -103,7 +103,7 @@ class VirtualLedStripWithPowerLimit : public ILedStripWithStorage {
                     RGBW currentColor = baseStrip.getLed(i);
                     uint32_t currentBrightness = currentColor.getTotalBrightness();
 
-                    if (currentBrightness > 0) {
+                    if (currentBrightness >= 10) {
                         baseStrip.setLed(i, currentColor.getWithTotalBrightness(currentBrightness - 10));
                     }
                 }
