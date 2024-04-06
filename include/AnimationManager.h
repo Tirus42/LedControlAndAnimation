@@ -197,4 +197,12 @@ class AnimationManager {
         bool empty() const {
             return queue.empty();
         }
+
+        /**
+         * Deletes all active animations.
+         * Note that the end color of animations will not be applied.
+         */
+        void clear() {
+            queue.clear();
+        }
 };
