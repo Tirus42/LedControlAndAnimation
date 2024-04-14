@@ -19,4 +19,20 @@ class ILedStripWithStorage : public ILedStrip {
 
             return false;
         }
+
+        /**
+         * Copies the current content of this led strip to the given led strip
+         * starting at offset 0. Checks for the size of the target.
+         */
+        virtual void copyTo(ILedStrip& target, bool flush = false) {
+            ledoffset_t maxOffset = std::min(getLedCount(), target.getLedCount());
+
+            for (ledoffset_t i = 0; i < maxOffset; ++i) {
+                target.setLed(i, getLed(i), false);
+            }
+
+            if (flush) {
+                target.updateLeds();
+            }
+        }
 };
