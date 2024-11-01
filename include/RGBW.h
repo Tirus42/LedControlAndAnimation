@@ -30,6 +30,11 @@ struct RGBW {
         b((packedColor & 0xFF)),
         w((packedColor & 0xFF000000) >> 24) {}
 
+    /// Returns the RGBW value as packed uint32_t (byte order: WRGB)
+    uint32_t getAsPackedColor() const {
+        return uint32_t(w) << 24 | uint32_t(r) << 16 | uint32_t(g) << 8 | uint32_t(b);
+    }
+
     /// Returns the summed value over all 4 components
     uint16_t getTotalBrightness() const {
         return uint16_t(r) + uint16_t(g) + uint16_t(b) + uint16_t(w);
