@@ -6,7 +6,7 @@
 #include <iterator>
 
 template <typename ... Base>
-class VirtualMultiLedStrip : public ILedStripWithStorage {
+class VirtualMultiLedStrip : public virtual ILedStripWithStorage {
     public:
         virtual ledoffset_t getLedCount() const override {
             return 0;
@@ -20,7 +20,7 @@ class VirtualMultiLedStrip : public ILedStripWithStorage {
 };
 
 template <typename Base, typename ... Rest>
-class VirtualMultiLedStrip<Base, Rest ...> : public ILedStripWithStorage {
+class VirtualMultiLedStrip<Base, Rest ...> : public virtual ILedStripWithStorage {
     private:
         Base& first;
         VirtualMultiLedStrip<Rest ...> rest;
@@ -96,7 +96,7 @@ typedef VirtualMultiLedStrip<ILedStripWithStorage, ILedStripWithStorage, ILedStr
 * Simple pass-through virtual led strip.
 * Passes all calls to the base strip reference.
 */
-class VirtualPassthroughLedStrip : public ILedStripWithStorage {
+class VirtualPassthroughLedStrip : public virtual ILedStripWithStorage {
     protected:
         ILedStripWithStorage& baseStrip;
 
