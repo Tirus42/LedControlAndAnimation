@@ -25,6 +25,20 @@ class VirtualMultiLedStrip<Base, Rest ...> : public ILedStripWithStorage {
         Base& first;
         VirtualMultiLedStrip<Rest ...> rest;
 
+        const Base& getAffectedLedStrip_(ledoffset_t& inout_offset) const {
+            if (inout_offset < first.getLedCount()) {
+                return first;
+            } else {
+                inout_offset -= first.getLedCount();
+
+                if constexpr (sizeof...(Rest) > 0) {
+                    return rest.getAffectedLedStrip(inout_offset);
+                } else {
+                    return first;	// Should never happen
+                }
+            }
+        }
+
     public:
         VirtualMultiLedStrip(Base& first, Rest& ... rest) :
             first(first),
@@ -53,6 +67,23 @@ class VirtualMultiLedStrip<Base, Rest ...> : public ILedStripWithStorage {
         virtual void updateLeds() override {
             first.updateLeds();
             rest.updateLeds();
+        }
+
+        /**
+         * \param inout_offset returns the actual offset in the affected led strip.
+         * \returns the underlaying led strip which is affected by the specified offset.
+         */
+        const Base& getAffectedLedStrip(ledoffset_t& inout_offset) const {
+            return getAffectedLedStrip_(inout_offset);
+        }
+
+        /**
+         * \param inout_offset returns the actual offset in the affected led strip.
+         * \returns the underlaying led strip which is affected by the specified offset.
+         */
+        Base& getAffectedLedStrip(ledoffset_t& inout_offset) {
+            const Base& ledStrip = getAffectedLedStrip_(inout_offset);
+            return const_cast<Base&>(ledStrip);
         }
 };
 
