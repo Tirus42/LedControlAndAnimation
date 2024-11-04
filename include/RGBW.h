@@ -44,7 +44,7 @@ struct RGBW {
     * Returns a new RGBW value with all components adapted so that
     * the getTotalBrightness() is <= the \param targetBrightness.
     */
-    RGBW getWithTotalBrightness(uint16_t targetBrightness) {
+    RGBW getWithTotalBrightness(uint16_t targetBrightness) const {
         targetBrightness = std::min<uint16_t>(targetBrightness, 0xFF * 4);
 
         if (r == 0 && g == 0 && b == 0 && w == 0) {

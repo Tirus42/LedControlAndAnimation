@@ -39,7 +39,7 @@ class AAnimation {
         float getFactor(uint32_t currentTime) const {
             if (currentTime < getStartTime())
                 return 0.f;
-            if (currentTime > getEndTime())
+            if (currentTime >= getEndTime())
                 return 1.f;
 
             uint32_t animationTime = getEndTime() - currentTime;
