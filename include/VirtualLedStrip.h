@@ -104,7 +104,7 @@ class VirtualPassthroughLedStrip : public virtual ILedStripWithStorage {
         VirtualPassthroughLedStrip(ILedStripWithStorage& baseStrip) :
             baseStrip(baseStrip) {}
 
-        virtual ledoffset_t getLedCount() const {
+        virtual ledoffset_t getLedCount() const override {
             return baseStrip.getLedCount();
         }
 

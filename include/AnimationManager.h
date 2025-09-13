@@ -159,8 +159,10 @@ class AnimationManager {
             queue() {}
 
         void update() {
-            uint32_t currentTime = millis();
+            update(millis());
+        }
 
+        void update(uint32_t currentTime) {
             std::vector<size_t> dropIndex;
             std::set<ILedStripWithStorage*> affectedLeds;
 
