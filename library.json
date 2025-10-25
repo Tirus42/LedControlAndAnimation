@@ -1,6 +1,6 @@
 {
   "name": "LedControlAndAnimation",
-  "version": "1.5.2",
+  "version": "1.6.0",
   "description": "Header and implementation for led strips with a simple animation framework.",
   "keywords": "led, animation",
   "repository":
@@ -18,10 +18,10 @@
   "license": "GPL-3.0-or-later",
   "homepage": "https://github.com/Tirus42/LedControlAndAnimation",
   "dependencies": {
-    "tirus/CiString": "~1.0.2"
+    "tirus/CiString": "~1.0.3"
   },
-  "frameworks": "arduino",
-  "platforms": "espressif32",
+  "frameworks": "*",
+  "platforms": "*",
   "examples": [
     {
         "name": "APA102Animation",
